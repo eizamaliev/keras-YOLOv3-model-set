@@ -569,11 +569,15 @@ def yolo_adjust_boxes(boxes, img_shape):
         xmax = x + w
         ymax = y + h
 
-        ymin = max(0, np.floor(ymin + 0.5).astype('int32'))
-        xmin = max(0, np.floor(xmin + 0.5).astype('int32'))
-        ymax = min(height, np.floor(ymax + 0.5).astype('int32'))
-        xmax = min(width, np.floor(xmax + 0.5).astype('int32'))
+        # ymin = max(0, np.floor(ymin + 0.5).astype('int32'))
+        # xmin = max(0, np.floor(xmin + 0.5).astype('int32'))
+        # ymax = min(height, np.floor(ymax + 0.5).astype('int32'))
+        # xmax = min(width, np.floor(xmax + 0.5).astype('int32'))
+        xmin = max(0, xmin)
+        ymin = max(0, ymin)
+        ymax = min(height, ymax)
+        xmax = min(width, xmax)
         adjusted_boxes.append([xmin,ymin,xmax,ymax])
 
-    return np.array(adjusted_boxes,dtype=np.int32)
-
+    # return np.array(adjusted_boxes,dtype=np.int32)
+    return np.array(adjusted_boxes)

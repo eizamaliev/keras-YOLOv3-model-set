@@ -6,7 +6,7 @@ import numpy as np
 from tqdm import tqdm
 from collections import defaultdict, OrderedDict
 
-sets=[('instances_train2017', 'train2017'), ('instances_val2017', 'val2017')]
+sets=[ ('instances_val2017', 'val2017')]
 
 class_count = {}
 
@@ -153,12 +153,16 @@ for dataset, datatype in sets:
             # bbox format: [xmin, ymin, w, h]
             bbox = box_info[0]
             category_id = box_info[1]
-            x_min = int(bbox[0])
-            y_min = int(bbox[1])
-            x_max = x_min + int(bbox[2])
-            y_max = y_min + int(bbox[3])
+            # x_min = int(bbox[0])
+            # y_min = int(bbox[1])
+            # x_max = x_min + int(bbox[2])
+            # y_max = y_min + int(bbox[3])
+            x_min = bbox[0]
+            y_min = bbox[1]
+            x_max = x_min + bbox[2]
+            y_max = y_min + bbox[3]
 
-            box_annotation = " %d,%d,%d,%d,%d" % (
+            box_annotation = " %.2f,%.2f,%.2f,%.2f,%d" % (
                 x_min, y_min, x_max, y_max, int(category_id))
             annotation_file.write(box_annotation)
         annotation_file.write('\n')

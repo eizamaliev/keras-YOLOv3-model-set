@@ -16,7 +16,7 @@ from tqdm import tqdm
 from tensorflow.keras.models import load_model
 import tensorflow.keras.backend as K
 import tensorflow as tf
-import MNN
+# import MNN
 import onnxruntime
 
 from yolo5.postprocess_np import yolo5_postprocess_np
@@ -1196,7 +1196,7 @@ def get_scale_gt_dict(gt_classes_records, class_names):
 
         for (image_file, box) in gt_records:
             # get box area based on coordinate
-            box_coord = [int(p) for p in box.split(',')]
+            box_coord = [float(p) for p in box.split(',')]
             box_area = (box_coord[2] - box_coord[0]) * (box_coord[3] - box_coord[1])
 
             # add to corresponding gt records dict according to area size
